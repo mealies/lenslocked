@@ -5,13 +5,13 @@ import (
 	"net/http"
 )
 
-func handlerfunc(w http.ResponseWriter, r *http.Request) {
+func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	fmt.Fprintf(w, "<h1>Welcome to my awesome site!</h1>")
 }
 
 func main() {
-	http.HandleFunc("/", handlerfunc)
+	http.HandleFunc("/", homeHandler)
 	fmt.Println("Starting the server on :3000")
 	http.ListenAndServe("localhost:3000", nil)
 }
