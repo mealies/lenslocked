@@ -17,7 +17,17 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func pathHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, r.URL.Path)
+	switch r.URL.Path {
+	case "/":
+		homeHandler(w, r)
+	case "/contact":
+		contactHandler(w, r)
+	default:
+		// TODO: handle the page not found error
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.WriteHeader(404)
+		fmt.Fprintf(w, "<h2>404 - Page not found</h2>")
+	}
 }
 
 func main() {
